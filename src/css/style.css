@@ -16,7 +16,7 @@ body {
   border: 1px solid black;
 }
 
-.active {
+.goblin {
   background-image: url('../img/goblin.png');
   background-size: 30px;
   background-repeat: no-repeat;

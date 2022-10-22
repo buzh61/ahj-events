@@ -1,9 +1,6 @@
-import Area from "./Area";
-import Goblin from "./Goblin";
+import Gameplay from "./Gameplay";
+const gameplay = new Gameplay();
+gameplay.createField();
+gameplay.createGoblin();
 
 const container = document.querySelector('.area-container');
-const area = new Area(container);
-area.generateArea(16);
-
-const goblin = new Goblin(container);
-goblin.moveToRandomCell();
