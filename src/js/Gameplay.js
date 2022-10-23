@@ -21,7 +21,13 @@ export default class Gameplay {
     this.addEvent();
   }
 
-  createGoblin() {
+  createGoblin(cell) {
+    if (this.interval) {
+      clearInterval(this.interval);
+      cell.classList.remove('goblin')
+      this.interval = false;
+    }
+
     this.index = this.getRandomCell();
     this.cells[this.index].classList.add('goblin');
     this.startMoveGoblin();
@@ -31,16 +37,26 @@ export default class Gameplay {
     for (let i in this.cells) {
       this.cells[i].onclick = () => {
         if (this.cells[i].classList.contains('goblin')) {
-          // Добавить прибавление счетчика
-          score.increaseScore();
-          clearInterval(this.interval);
-          this.cells[i].classList.remove('goblin')
-          this.interval = false;
-          this.createGoblin();
+          score.increaseWinScore();
+
+          this.createGoblin(this.cells[i]);
+        } else {
+          score.increaseLosingScore();
         }
+        this.checkResult()
+
       }
     }
+  }
 
+  checkResult() {
+    if (score.winScore === 5) {
+      this.endGame();
+      alert('Победа');
+    } else if (score.losingScore === 5) {
+      this.endGame();
+      alert('Поражение');
+    }
   }
 
   startMoveGoblin() {
@@ -66,5 +82,14 @@ export default class Gameplay {
     }
 
     return result;
+  }
+
+  endGame() {
+    this.interval = false;
+    let goblin = document.querySelector('.goblin');
+    goblin.classList.remove('goblin');
+    for (let i in this.cells) {
+      this.cells[i].onclick = null;
+    }
   }
 }

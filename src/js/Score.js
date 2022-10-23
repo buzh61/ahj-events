@@ -1,18 +1,32 @@
+import Gameplay from "./Gameplay";
+
+// let gameplay = new Gameplay();
+
 export default class Score {
   constructor() {
-    this.scoreContainer = document.querySelector('.score');
-    this.score = 0;
+    this.winScoreContainer = document.querySelector('.win-score');
+    this.losingScoreContainer = document.querySelector('.losing-score');
+    this.winScore = 0;
+    this.losingScore = 0;
   }
 
-  increaseScore() {
-    this.score += 1;
-    this.scoreContainer.innerHTML = this.score;
-    this.checkWin();
+  increaseWinScore() {
+    this.winScore += 1;
+    this.winScoreContainer.innerHTML = this.winScore;
+    this.checkScoreResult();
   }
 
-  checkWin() {
-    if (this.score === 5) {
-      alert('Победа!')
+  increaseLosingScore() {
+    this.losingScore += 1;
+    this.losingScoreContainer.innerHTML = this.losingScore;
+    this.checkScoreResult();
+  }
+
+  checkScoreResult() {
+    if (this.winScore === 5) {
+      return false
+    } else if (this.losingScore === 5) {
+      return false
     }
   }
 }
